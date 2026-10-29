@@ -10,7 +10,7 @@ NAME_RE = re.compile(r"^(?P<prefix>.*?)take\d+_?(?P<tag>.+?)_?(?P<trial>\d{3})?_
 
 
 def parse_filename(path):
-    """take001li重003_chr01.csv -> ('li重', 3)
+    """take001abc重003_chr01.csv -> ('abc重', 3)
     大三take001chu003_chr01.csv -> ('chu', 3)      （文件名前缀忽略）
     take001yu_chr01.csv -> ('yu', 1)               （没有杆次编号 = 第 1 杆）
     不匹配返回 (None, None)。"""

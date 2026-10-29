@@ -14,7 +14,7 @@
 方差归因和占比都是运动学恒等式的直接结果，不依赖统计模型；与杆头参数的关系才用相关分析。
 
 输入：putt_preproc 的输出文件夹（features.csv, qc_report.csv, curves_wide.csv, chain_features.csv, chain_curves.csv）
-用法：python chain_results.py --dir <processed 文件夹> --out <输出文件夹> [--font "Times New Roman"] [--exclude Li]
+用法：python chain_results.py --dir <processed 文件夹> --out <输出文件夹> [--font "Times New Roman"] [--exclude P07]
 """
 import argparse
 import json

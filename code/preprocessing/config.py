@@ -33,5 +33,5 @@ CHAIN_RESID_WARN_PCT = 15.0    # 目标轴方向残差 RMS 超过实测握把速
 # 右手球员默认；左手球员在这里列出受试者名（与杆面表一致），程序做 X 轴镜像
 LEFT_HANDED = []           # e.g. ["P17"]; all participants in this study were right-handed
 
-# 同名同时存在 li 与 li重 时，优先用带此后缀的重测文件
+# 同名同时存在 name 与 name重 时，优先用带此后缀的重测文件
 REDO_SUFFIX = "重"

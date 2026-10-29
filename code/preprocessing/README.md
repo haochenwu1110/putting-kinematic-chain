@@ -14,7 +14,7 @@ pip install numpy pandas scipy matplotlib openpyxl
    python run.py --dry-run --data "数据文件夹" --face "杆面表.xlsx"
    ```
    这一步会打印 **文件标签 → 受试者** 的映射，并在输出目录生成 `name_map.csv`。自动匹配只做大小写不敏感的完全相等，比如 `p01 → P01`。匹配不上的标签显示 `???`。在 `name_map.csv` 的 subject 列里手动填好以后，再跑一次 dry-run，直到映射和杆次对齐都没有报错。
-   - 同一个人既有 `li` 又有 `li重` 时，自动只用 `li重`。
+   - 同一个人既有 `name` 又有 `name重` 时，自动只用 `name重`。
 2. 正式处理：把 `--dry-run` 去掉，其余不变。200 个文件大约 2–3 分钟。
 3. 输出默认放在数据文件夹旁边的 `<数据文件夹名>_processed`，不会覆盖旧批次的结果；要换位置用 `--out`。
 4. 不再每杆出图，只输出 4 张 `overview_*.png` 总览图。想单独看某几杆：`--plots-for P06:8,P08:10`；全部出图：`--plots`。

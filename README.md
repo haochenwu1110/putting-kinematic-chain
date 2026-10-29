@@ -2,7 +2,7 @@
 
 Data and code for the paper
 
-> Fan, X.; Lyu, W.; Chen, J.; Chen, W. **Testing the Pendulum Model of Golf Putting: A Stroke-by-Stroke
+> Fan, X.; Lv, W.; Chen, J.; Chen, W. **Testing the Pendulum Model of Golf Putting: A Stroke-by-Stroke
 > Kinematic-Chain Analysis Using Wearable Inertial Sensors and a Launch Monitor.** *Bioengineering* (submitted).
 
 Twenty right-handed golf-major university students each performed ten straight 5 m putts while wearing a
@@ -172,7 +172,7 @@ Long-format curves: one row per putt × variable (`var`), with 303 columns `back
 ## Licence and citation
 
 Code: MIT (`LICENSE`). Data: CC BY 4.0 (`LICENSE-DATA.md`). Please cite the paper and this dataset (`CITATION.cff`).
-Zenodo DOI: **[to be added]**.
+Zenodo DOI: [10.5281/zenodo.23766847](https://doi.org/10.5281/zenodo.23766847) (code, processed data and the 200 raw motion-capture recordings).
 
 ## Contact
 

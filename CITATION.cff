@@ -2,25 +2,25 @@ cff-version: 1.2.0
 message: "If you use these data or code, please cite the paper and this repository."
 title: "Data and code for: Testing the Pendulum Model of Golf Putting: A Stroke-by-Stroke Kinematic-Chain Analysis Using Wearable Inertial Sensors and a Launch Monitor"
 authors:
-  - family-names: Fan
-    given-names: Xudong
-  - family-names: Lyu
-    given-names: Wenxue
-  - family-names: Chen
-    given-names: Jiayi
   - family-names: Chen
     given-names: Weizheng
+  - family-names: Chen
+    given-names: Jiayi
+  - family-names: Fan
+    given-names: Xudong
+  - family-names: Lv
+    given-names: Wenxue
 version: 1.0.0
 date-released: 2026-10-29
 license: [MIT, CC-BY-4.0]
-# doi: 10.5281/zenodo.XXXXXXX   <- add after the Zenodo release
+doi: 10.5281/zenodo.23766847
 preferred-citation:
   type: article
   title: "Testing the Pendulum Model of Golf Putting: A Stroke-by-Stroke Kinematic-Chain Analysis Using Wearable Inertial Sensors and a Launch Monitor"
   authors:
     - family-names: Fan
       given-names: Xudong
-    - family-names: Lyu
+    - family-names: Lv
       given-names: Wenxue
     - family-names: Chen
       given-names: Jiayi
