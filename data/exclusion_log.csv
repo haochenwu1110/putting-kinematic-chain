@@ -1,0 +1,201 @@
+raw_file,participant_id,trial,qc_status,qc_flags,exclusion_rule,exclusion_reason,included
+take001_P01_001_chr01.csv,P01,1,WARN,impact_vs_peak_-5.3f,,,True
+take001_P01_002_chr01.csv,P01,2,WARN,leg_sensor_lost:RightUpLeg; impact_vs_peak_-7.3f,,,True
+take001_P01_003_chr01.csv,P01,3,WARN,leg_sensor_lost:RightUpLeg; impact_vs_peak_-6.9f; minor_gap_60f; chain_resid_26pct,,,True
+take001_P01_004_chr01.csv,P01,4,OK,,,,True
+take001_P01_005_chr01.csv,P01,5,CHECK,leg_sensor_lost:RightUpLeg; impact_vs_peak_-7.6f; gap_32f_near_impact,R3,gap between top and impact longer than 0.33 s (20 frames),False
+take001_P01_006_chr01.csv,P01,6,WARN,impact_vs_peak_-5.0f,,,True
+take001_P01_007_chr01.csv,P01,7,WARN,impact_vs_peak_-5.4f,,,True
+take001_P01_008_chr01.csv,P01,8,OK,,,,True
+take001_P01_009_chr01.csv,P01,9,WARN,impact_vs_peak_-8.1f,,,True
+take001_P01_010_chr01.csv,P01,10,WARN,impact_vs_peak_-12.3f,,,True
+take002_P02_001_chr01.csv,P02,1,OK,,,,True
+take002_P02_002_chr01.csv,P02,2,OK,,,,True
+take002_P02_003_chr01.csv,P02,3,WARN,multi_stroke(2); impact_vs_peak_-19.6f; minor_gap_24f,,,True
+take002_P02_004_chr01.csv,P02,4,WARN,takeaway_at_file_start; short_address_window,,,True
+take002_P02_005_chr01.csv,P02,5,WARN,impact_vs_peak_-5.7f,,,True
+take002_P02_006_chr01.csv,P02,6,WARN,impact_vs_peak_-15.4f,,,True
+take002_P02_007_chr01.csv,P02,7,OK,,,,True
+take002_P02_008_chr01.csv,P02,8,WARN,leg_sensor_lost:RightUpLeg; takeaway_at_file_start; short_address_window; chain_resid_25pct,,,True
+take002_P02_009_chr01.csv,P02,9,WARN,leg_sensor_lost:RightUpLeg; impact_vs_peak_-9.5f; minor_gap_35f,,,True
+take002_P02_010_chr01.csv,P02,10,WARN,impact_vs_peak_-6.2f; minor_gap_25f,,,True
+take003_P03_001_chr01.csv,P03,1,OK,,,,True
+take003_P03_002_chr01.csv,P03,2,CHECK,leg_sensor_lost:RightUpLeg; gap_24f_near_impact; chain_resid_22pct,R3,gap between top and impact longer than 0.33 s (20 frames),False
+take003_P03_003_chr01.csv,P03,3,OK,,,,True
+take003_P03_004_chr01.csv,P03,4,OK,,,,True
+take003_P03_005_chr01.csv,P03,5,OK,,,,True
+take003_P03_006_chr01.csv,P03,6,WARN,minor_gap_27f,,,True
+take003_P03_007_chr01.csv,P03,7,WARN,takeaway_at_file_start; impact_vs_peak_-7.4f,,,True
+take003_P03_008_chr01.csv,P03,8,WARN,takeaway_at_file_start; short_address_window; impact_vs_peak_-6.1f,,,True
+take003_P03_009_chr01.csv,P03,9,WARN,impact_vs_peak_-12.5f; minor_gap_27f,,,True
+take003_P03_010_chr01.csv,P03,10,WARN,impact_vs_peak_-10.6f,,,True
+take004_P04_001_chr01.csv,P04,1,WARN,multi_stroke(2); impact_vs_peak_+5.3f,,,True
+take004_P04_002_chr01.csv,P04,2,OK,,,,True
+take004_P04_003_chr01.csv,P04,3,OK,,,,True
+take004_P04_004_chr01.csv,P04,4,OK,,,,True
+take004_P04_005_chr01.csv,P04,5,OK,,,,True
+take004_P04_006_chr01.csv,P04,6,OK,,,,True
+take004_P04_007_chr01.csv,P04,7,OK,,,,True
+take004_P04_008_chr01.csv,P04,8,WARN,multi_stroke(2),,,True
+take004_P04_009_chr01.csv,P04,9,WARN,multi_stroke(3),,,True
+take004_P04_010_chr01.csv,P04,10,WARN,impact_vs_peak_-5.6f,,,True
+take005_P05_001_chr01.csv,P05,1,OK,,,,True
+take005_P05_002_chr01.csv,P05,2,WARN,impact_vs_peak_-11.0f,,,True
+take005_P05_003_chr01.csv,P05,3,WARN,multi_stroke(2); impact_vs_peak_-9.3f,,,True
+take005_P05_004_chr01.csv,P05,4,WARN,impact_vs_peak_-8.8f; minor_gap_62f,,,True
+take005_P05_005_chr01.csv,P05,5,FAIL,no_top,R1,stroke events could not be identified reliably,False
+take005_P05_006_chr01.csv,P05,6,WARN,minor_gap_25f,,,True
+take005_P05_007_chr01.csv,P05,7,WARN,impact_vs_peak_-14.5f,,,True
+take005_P05_008_chr01.csv,P05,8,WARN,impact_vs_peak_-5.9f,,,True
+take005_P05_009_chr01.csv,P05,9,WARN,impact_vs_peak_-9.5f,,,True
+take005_P05_010_chr01.csv,P05,10,FAIL,no_top,R1,stroke events could not be identified reliably,False
+take006_P06_001_chr01.csv,P06,1,OK,,,,True
+take006_P06_002_chr01.csv,P06,2,OK,,,,True
+take006_P06_003_chr01.csv,P06,3,WARN,impact_vs_peak_+5.2f,,,True
+take006_P06_004_chr01.csv,P06,4,WARN,impact_vs_peak_+6.0f,,,True
+take006_P06_005_chr01.csv,P06,5,OK,,,,True
+take006_P06_006_chr01.csv,P06,6,WARN,takeaway_at_file_start; short_address_window,,,True
+take006_P06_007_chr01.csv,P06,7,WARN,multi_stroke(2),,,True
+take006_P06_008_chr01.csv,P06,8,FAIL,no_backswing,R1,stroke events could not be identified reliably,False
+take006_P06_009_chr01.csv,P06,9,OK,,,,True
+take006_P06_010_chr01.csv,P06,10,FAIL,no_top,R1,stroke events could not be identified reliably,False
+take007_P07_001_chr01.csv,P07,1,OK,,,,True
+take007_P07_002_chr01.csv,P07,2,OK,,,,True
+take007_P07_003_chr01.csv,P07,3,OK,,,,True
+take007_P07_004_chr01.csv,P07,4,CHECK,key_sensor_lost:Spine2; minor_gap_26f,R2,"pelvis, thorax or arm sensor dropped out",False
+take007_P07_005_chr01.csv,P07,5,FAIL,key_sensor_lost:Hips|LeftLeg|LeftUpLeg|RightArm|RightLeg|RightUpLeg|Spine2; no_top,R1,stroke events could not be identified reliably,False
+take007_P07_006_chr01.csv,P07,6,CHECK,key_sensor_lost:Spine2; takeaway_at_file_start; short_address_window; gap_25f_near_impact; chain_resid_34pct,R2,"pelvis, thorax or arm sensor dropped out",False
+take007_P07_007_chr01.csv,P07,7,WARN,takeaway_at_file_start; short_address_window; minor_gap_27f; chain_resid_19pct,,,True
+take007_P07_008_chr01.csv,P07,8,OK,,,,True
+take007_P07_009_chr01.csv,P07,9,WARN,takeaway_at_file_start; minor_gap_42f; chain_resid_18pct,,,True
+take007_P07_010_chr01.csv,P07,10,WARN,minor_gap_23f,,,True
+take008_P08_001_chr01.csv,P08,1,OK,,,,True
+take008_P08_002_chr01.csv,P08,2,WARN,impact_vs_peak_+6.4f,,,True
+take008_P08_003_chr01.csv,P08,3,OK,,,,True
+take008_P08_004_chr01.csv,P08,4,OK,,,,True
+take008_P08_005_chr01.csv,P08,5,OK,,,,True
+take008_P08_006_chr01.csv,P08,6,OK,,,,True
+take008_P08_007_chr01.csv,P08,7,OK,,,,True
+take008_P08_008_chr01.csv,P08,8,OK,,,,True
+take008_P08_009_chr01.csv,P08,9,OK,,,,True
+take008_P08_010_chr01.csv,P08,10,WARN,impact_vs_peak_-16.6f,,,True
+take009_P09_001_chr01.csv,P09,1,FAIL,multi_stroke(2); no_top,R1,stroke events could not be identified reliably,False
+take009_P09_002_chr01.csv,P09,2,OK,,,,True
+take009_P09_003_chr01.csv,P09,3,OK,,,,True
+take009_P09_004_chr01.csv,P09,4,OK,,,,True
+take009_P09_005_chr01.csv,P09,5,OK,,,,True
+take009_P09_006_chr01.csv,P09,6,OK,,,,True
+take009_P09_007_chr01.csv,P09,7,OK,,,,True
+take009_P09_008_chr01.csv,P09,8,OK,,,,True
+take009_P09_009_chr01.csv,P09,9,OK,,,,True
+take009_P09_010_chr01.csv,P09,10,OK,,,,True
+take010_P10_001_chr01.csv,P10,1,WARN,impact_vs_peak_+9.3f,,,True
+take010_P10_002_chr01.csv,P10,2,OK,,,,True
+take010_P10_003_chr01.csv,P10,3,OK,,,,True
+take010_P10_004_chr01.csv,P10,4,WARN,impact_vs_peak_+7.1f,,,True
+take010_P10_005_chr01.csv,P10,5,OK,,,,True
+take010_P10_006_chr01.csv,P10,6,OK,,,,True
+take010_P10_007_chr01.csv,P10,7,OK,,,,True
+take010_P10_008_chr01.csv,P10,8,OK,,,,True
+take010_P10_009_chr01.csv,P10,9,OK,,,,True
+take010_P10_010_chr01.csv,P10,10,OK,,,,True
+take011_P11_001_chr01.csv,P11,1,WARN,impact_vs_peak_+10.2f,,,True
+take011_P11_002_chr01.csv,P11,2,OK,,,,True
+take011_P11_003_chr01.csv,P11,3,WARN,multi_stroke(3),,,True
+take011_P11_004_chr01.csv,P11,4,WARN,multi_stroke(2); impact_vs_peak_+5.0f,,,True
+take011_P11_005_chr01.csv,P11,5,WARN,multi_stroke(2),,,True
+take011_P11_006_chr01.csv,P11,6,WARN,multi_stroke(2),,,True
+take011_P11_007_chr01.csv,P11,7,OK,,,,True
+take011_P11_008_chr01.csv,P11,8,WARN,impact_vs_peak_-5.5f,,,True
+take011_P11_009_chr01.csv,P11,9,OK,,,,True
+take011_P11_010_chr01.csv,P11,10,WARN,multi_stroke(2),,,True
+take012_P12_001_chr01.csv,P12,1,OK,,,,True
+take012_P12_002_chr01.csv,P12,2,OK,,,,True
+take012_P12_003_chr01.csv,P12,3,OK,,,,True
+take012_P12_004_chr01.csv,P12,4,WARN,takeaway_at_file_start; short_address_window,,,True
+take012_P12_005_chr01.csv,P12,5,WARN,multi_stroke(2),,,True
+take012_P12_006_chr01.csv,P12,6,OK,,,,True
+take012_P12_007_chr01.csv,P12,7,OK,,,,True
+take012_P12_008_chr01.csv,P12,8,OK,,,,True
+take012_P12_009_chr01.csv,P12,9,WARN,takeaway_at_file_start,,,True
+take012_P12_010_chr01.csv,P12,10,OK,,,,True
+take013_P13_001_chr01.csv,P13,1,WARN,multi_stroke(3),,,True
+take013_P13_002_chr01.csv,P13,2,WARN,impact_vs_peak_-12.9f,,,True
+take013_P13_003_chr01.csv,P13,3,WARN,impact_vs_peak_-12.8f,,,True
+take013_P13_004_chr01.csv,P13,4,OK,,,,True
+take013_P13_005_chr01.csv,P13,5,OK,,,,True
+take013_P13_006_chr01.csv,P13,6,OK,,,,True
+take013_P13_007_chr01.csv,P13,7,OK,,,,True
+take013_P13_008_chr01.csv,P13,8,OK,,,,True
+take013_P13_009_chr01.csv,P13,9,WARN,impact_vs_peak_-6.9f,,,True
+take013_P13_010_chr01.csv,P13,10,OK,,,,True
+take014_P14_001_chr01.csv,P14,1,WARN,impact_vs_peak_-5.5f,,,True
+take014_P14_002_chr01.csv,P14,2,OK,,,,True
+take014_P14_003_chr01.csv,P14,3,WARN,impact_vs_peak_-6.9f,,,True
+take014_P14_004_chr01.csv,P14,4,WARN,impact_vs_peak_-11.8f,,,True
+take014_P14_005_chr01.csv,P14,5,WARN,impact_vs_peak_-5.7f,,,True
+take014_P14_006_chr01.csv,P14,6,WARN,impact_vs_peak_-7.5f,,,True
+take014_P14_007_chr01.csv,P14,7,WARN,impact_vs_peak_-16.2f,,,True
+take014_P14_008_chr01.csv,P14,8,WARN,takeaway_at_file_start; impact_vs_peak_-8.6f,,,True
+take014_P14_009_chr01.csv,P14,9,OK,,,,True
+take014_P14_010_chr01.csv,P14,10,WARN,impact_vs_peak_-5.4f,,,True
+take015_P15_001_chr01.csv,P15,1,OK,,,,True
+take015_P15_002_chr01.csv,P15,2,WARN,minor_gap_23f,,,True
+take015_P15_003_chr01.csv,P15,3,OK,,,,True
+take015_P15_004_chr01.csv,P15,4,OK,,,,True
+take015_P15_005_chr01.csv,P15,5,OK,,,,True
+take015_P15_006_chr01.csv,P15,6,WARN,takeaway_at_file_start,,,True
+take015_P15_007_chr01.csv,P15,7,OK,,,,True
+take015_P15_008_chr01.csv,P15,8,WARN,multi_stroke(2),,,True
+take015_P15_009_chr01.csv,P15,9,OK,,,,True
+take015_P15_010_chr01.csv,P15,10,WARN,multi_stroke(2); impact_vs_peak_+6.7f,,,True
+take016_P16_001_chr01.csv,P16,1,OK,,,,True
+take016_P16_002_chr01.csv,P16,2,WARN,multi_stroke(2),,,True
+take016_P16_003_chr01.csv,P16,3,OK,,,,True
+take016_P16_004_chr01.csv,P16,4,OK,,,,True
+take016_P16_005_chr01.csv,P16,5,WARN,impact_vs_peak_-6.3f,,,True
+take016_P16_006_chr01.csv,P16,6,WARN,takeaway_at_file_start; short_address_window; impact_vs_peak_-13.9f,,,True
+take016_P16_007_chr01.csv,P16,7,WARN,impact_vs_peak_-6.3f,,,True
+take016_P16_008_chr01.csv,P16,8,OK,,,,True
+take016_P16_009_chr01.csv,P16,9,OK,,,,True
+take016_P16_010_chr01.csv,P16,10,OK,,,,True
+take017_P17_001_chr01.csv,P17,1,WARN,impact_vs_peak_-7.4f,,,True
+take017_P17_002_chr01.csv,P17,2,WARN,impact_vs_peak_-7.4f,,,True
+take017_P17_003_chr01.csv,P17,3,WARN,impact_vs_peak_-8.4f,,,True
+take017_P17_004_chr01.csv,P17,4,WARN,impact_vs_peak_-10.4f,,,True
+take017_P17_005_chr01.csv,P17,5,WARN,impact_vs_peak_-6.4f,,,True
+take017_P17_006_chr01.csv,P17,6,WARN,takeaway_at_file_start; impact_vs_peak_-9.3f,,,True
+take017_P17_007_chr01.csv,P17,7,WARN,multi_stroke(2); impact_vs_peak_-18.5f,,,True
+take017_P17_008_chr01.csv,P17,8,WARN,impact_vs_peak_-9.9f,,,True
+take017_P17_009_chr01.csv,P17,9,WARN,multi_stroke(2); impact_vs_peak_-10.3f,,,True
+take017_P17_010_chr01.csv,P17,10,CHECK,multi_stroke(2); takeaway_at_file_start; short_address_window; impact_fallback_peak,R1,stroke events could not be identified reliably,False
+take018_P18_001_chr01.csv,P18,1,OK,,,,True
+take018_P18_002_chr01.csv,P18,2,OK,,,,True
+take018_P18_003_chr01.csv,P18,3,OK,,,,True
+take018_P18_004_chr01.csv,P18,4,OK,,,,True
+take018_P18_005_chr01.csv,P18,5,OK,,,,True
+take018_P18_006_chr01.csv,P18,6,OK,,,,True
+take018_P18_007_chr01.csv,P18,7,OK,,,,True
+take018_P18_008_chr01.csv,P18,8,OK,,,,True
+take018_P18_009_chr01.csv,P18,9,WARN,impact_vs_peak_-6.3f,,,True
+take018_P18_010_chr01.csv,P18,10,CHECK,key_sensor_lost:Hips; minor_gap_58f; chain_resid_39pct,R2,"pelvis, thorax or arm sensor dropped out",False
+take019_P19_001_chr01.csv,P19,1,WARN,impact_vs_peak_-5.4f,,,True
+take019_P19_002_chr01.csv,P19,2,WARN,impact_vs_peak_-5.5f,,,True
+take019_P19_003_chr01.csv,P19,3,OK,,,,True
+take019_P19_004_chr01.csv,P19,4,WARN,impact_vs_peak_+6.4f,,,True
+take019_P19_005_chr01.csv,P19,5,OK,,,,True
+take019_P19_006_chr01.csv,P19,6,OK,,,,True
+take019_P19_007_chr01.csv,P19,7,WARN,takeaway_at_file_start; short_address_window; impact_vs_peak_-12.3f,,,True
+take019_P19_008_chr01.csv,P19,8,WARN,impact_vs_peak_-12.1f,,,True
+take019_P19_009_chr01.csv,P19,9,WARN,multi_stroke(2); takeaway_at_file_start; impact_vs_peak_-6.9f,,,True
+take019_P19_010_chr01.csv,P19,10,OK,,,,True
+take020_P20_001_chr01.csv,P20,1,WARN,impact_vs_peak_-5.4f,,,True
+take020_P20_002_chr01.csv,P20,2,WARN,multi_stroke(2); takeaway_at_file_start; impact_vs_peak_-6.8f,,,True
+take020_P20_003_chr01.csv,P20,3,WARN,takeaway_at_file_start; impact_vs_peak_-10.3f,,,True
+take020_P20_004_chr01.csv,P20,4,WARN,takeaway_at_file_start; impact_vs_peak_-10.3f,,,True
+take020_P20_005_chr01.csv,P20,5,WARN,impact_vs_peak_-6.0f,,,True
+take020_P20_006_chr01.csv,P20,6,WARN,impact_vs_peak_-8.3f,,,True
+take020_P20_007_chr01.csv,P20,7,WARN,impact_vs_peak_-5.3f,,,True
+take020_P20_008_chr01.csv,P20,8,WARN,multi_stroke(2); impact_vs_peak_-7.5f,,,True
+take020_P20_009_chr01.csv,P20,9,WARN,impact_vs_peak_-5.8f,,,True
+take020_P20_010_chr01.csv,P20,10,WARN,impact_vs_peak_-7.5f,,,True

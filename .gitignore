@@ -1,0 +1,13 @@
+# private keys and original (identifiable) recordings -- never commit
+PRIVATE_*
+**/PRIVATE_*
+original/
+# raw motion-capture files are distributed through Zenodo (too large for GitHub)
+data/raw/*.csv
+# regenerated outputs
+data/processed_rerun/
+validation_output/
+results_rerun/
+__pycache__/
+*.pyc
+.DS_Store
