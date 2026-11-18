@@ -29,7 +29,8 @@ from .kin import DISTAL, EX, EY, EZ
 # 骨盆 / 脊柱 / 锁骨环节的三条转动轴（环节局部系）
 AXES_BODY = {"twist": EY, "flex": EX, "bend": EZ}
 
-SPINE = ["Spine", "Spine1", "Spine2", "Spine3"]   # 按层级顺序；文件里没有的自动跳过
+import os
+SPINE = ["Spine2"] if os.environ.get("PUTT_SPINE_COLLAPSE") == "1" else ["Spine", "Spine1", "Spine2", "Spine3"]   # 按层级顺序；文件里没有的自动跳过
 GROUP_OF = {"Hips": "pelvis_rot", "Spine": "trunk", "Spine1": "trunk", "Spine2": "trunk", "Spine3": "trunk"}
 BODY_GROUPS = ["pelvis_trans", "pelvis_rot", "trunk", "girdle"]
 ROLL_GROUPS = ["pelvis_rot", "trunk", "girdle", "shoulder", "elbow"]
@@ -99,6 +100,10 @@ def _axis_components(dw, quat_seg, seg):
       axial = 绕长轴旋转（上臂内外旋 / 前臂旋前旋后），swing = 其余摆动
     """
     r = R.from_quat(quat_seg)
+    _pd = float(os.environ.get("PUTT_AXIS_PERTURB_DEG", 0.0))
+    if _pd:   # sensitivity: misalign the segment's local axes by a fixed rotation
+        _ax = {"x": [1, 0, 0], "z": [0, 0, 1]}[os.environ.get("PUTT_AXIS_PERTURB_DIR", "x")]
+        r = r * R.from_rotvec(np.radians(_pd) * np.array(_ax, float))
     if _group(seg) in ("shoulder", "elbow"):
         side = "Left" if seg.startswith("Left") else "Right"
         a = r.apply(DISTAL[side])

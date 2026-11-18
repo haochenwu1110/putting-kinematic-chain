@@ -11,7 +11,23 @@ stroke. Grip motion and forearm roll were decomposed into joint and rotation-axi
 rigid-body kinematic-chain identity, and all variation was analysed within players.
 
 Running `python reproduce.py` regenerates every statistic, Tables 1–2 and Figures 2–4 of the paper from the
-files in `data/processed/` (verified to reproduce `results/chain_results.json` exactly).
+files in `data/processed/` (verified to reproduce `results/chain_results.json` exactly). The analyses added in
+the revision (Figure 5, Figures S1–S4, Tables S3–S6, ICC confidence intervals, sensitivity analyses) are
+reproduced by `python code/revision/run_revision.py` (see *What changed in v1.1* below and `CHANGELOG.md`).
+
+## What changed in v1.1 (revision)
+
+- **Gap filling.** v1.0 interpolated every segment whenever any of the 10 sensors lost data. v1.1 interpolates
+  each segment only over the frames in which the sensors it depends on were lost (`PUTT_MASK_MODE=per`, now the
+  default; `union` reproduces v1.0). 190 putts are retained instead of 188. `data/processed/` and `results/` were
+  regenerated with this setting; `data/processed/events.csv` (event frames per putt) was added.
+- **Exclusion labels** in `data/exclusion_log.csv` and in `chain_results.json` now follow the paper (R1–R3).
+- **Axis-split test family.** Forearm pronation–supination contributes geometrically zero grip displacement
+  (< 0.2 mm numerically) and is no longer tested against club-head speed (27 instead of 30 tests).
+- **New analyses** in `code/revision/`: pendulum geometry and lower limb (`pendulum_lower_limb.py`), data quality and
+  filter justification (`data_quality.py`), ICC confidence intervals, isochrony, trial order, leave-one-out
+  (`extra_stats.py`), all sensitivity analyses (`sensitivity.py`) and Figures 5 and S1–S4 (`revision_figures.py`).
+  Their outputs are in `results/revision/`.
 
 ## Repository layout
 
@@ -23,18 +39,21 @@ files in `data/processed/` (verified to reproduce `results/chain_results.json` e
 │   ├── gcquad.csv               launch-monitor data, one row per putt (200 rows)
 │   ├── pairing.csv              which raw file belongs to which launch-monitor row
 │   ├── participants.csv         participant characteristics (P01–P20)
-│   ├── exclusion_log.csv        QC status of all 200 putts and the exclusion rule applied (R1–R3)
+│   ├── exclusion_log.csv        QC status of all 200 putts and the exclusion rule applied (R1–R3, as in the paper)
 │   └── processed/               output of the preprocessing pipeline (input of the analysis)
 │       ├── features.csv             one row per putt: timing, amplitude, joint angles, club data
 │       ├── chain_features.csv       one row per putt: kinematic-chain contributions
 │       ├── qc_report.csv            QC status and flags per putt
+│       ├── events.csv               event frames per putt (address window, takeaway, top, impact, finish)
 │       ├── curves_wide.csv.gz       time-normalised joint-angle curves (3 phases × 101 points)
 │       └── chain_curves.csv.gz      time-normalised contribution curves (3 phases × 101 points)
 ├── code/
 │   ├── preprocessing/           raw files -> data/processed/   (run.py, config.py, putt/*.py)
 │   ├── analysis/                data/processed/ -> results/    (chain_results.py, chain_figures.py, table2_timing.py)
-│   └── validation/              synthetic-data validation of the decomposition (Section 2.5)
+│   ├── validation/              synthetic-data validation of the decomposition (Section 2.5)
+│   └── revision/                analyses added in revision v1.1 (run_revision.py) -> results/revision/
 ├── results/                     results as reported in the paper (chain_results.json, figures, Table 2)
+│   └── revision/                Figure 5, Figures S1–S4, sensitivity table, pendulum and data-quality outputs
 └── tools/anonymize_raw.py       used once by the authors to de-identify the original recordings
 ```
 
@@ -52,7 +71,7 @@ pip install -r requirements.txt
 
 ```
 python reproduce.py                 # -> results_rerun/
-python reproduce.py --sensitivity   # also the sensitivity analysis without participant P07 (Section 3.5)
+python reproduce.py --sensitivity   # also the analysis without participant P07
 ```
 
 | Paper | Output |
@@ -66,7 +85,7 @@ python reproduce.py --sensitivity   # also the sensitivity analysis without part
 
 `chain_summary.md` is a short human-readable summary (in Chinese) of all key numbers.
 
-**2. Preprocessing (from the raw recordings, ~3 min)**
+**2. Preprocessing (from the raw recordings, ~1 min)**
 
 Download the raw files into `data/raw/`, then
 
@@ -77,9 +96,25 @@ python run.py               # -> data/processed_rerun/
 ```
 
 Paths default to the repository folders (`config.py`); use `--data`, `--face` and `--out` to change them.
+Gap filling is per segment by default (`PUTT_MASK_MODE=per`); set `PUTT_MASK_MODE=union` to reproduce v1.0.
 Point the analysis at the new folder with `python code/analysis/chain_results.py --dir data/processed_rerun --out results_rerun`.
 
-**3. Synthetic validation of the decomposition (Section 2.5, ~1 min)**
+**3. Analyses added in the revision (~30 min with the raw recordings)**
+
+```
+python code/revision/run_revision.py                 # -> results/revision/
+python code/revision/run_revision.py --skip-preproc  # only the parts that need data/processed/ (~3 min)
+```
+
+| Paper | Script → output in `results/revision/` |
+|---|---|
+| Section 3.5, Figure 5, Table 3 (pendulum geometry, lower limb) | `pendulum_lower_limb.py` → `pendulum/` |
+| Section 3.1, Table S3, Figure S4 (missing frames, impact timing, filter spectrum) | `data_quality.py` → `data_quality/` |
+| ICC 95% CIs, isochrony, trial order, leave-one-out, forearm roll (Tables 2, S4; Figure S2–S3) | `extra_stats.py` → `extra_stats.json` |
+| Section 3.6, Table S4, Figure S1 (all sensitivity analyses) | `sensitivity.py` → `sensitivity/sensitivity_table.csv` |
+| Figures 5 and S1–S4 | `revision_figures.py` → `figures/` |
+
+**4. Synthetic validation of the decomposition (Section 2.5, ~1 min)**
 
 ```
 python code/validation/check_synthetic.py
@@ -123,9 +158,10 @@ forearm roll to the elbow/forearm (> 99 %).
 ### `data/exclusion_log.csv`
 
 One row per recorded putt (200). `qc_status` / `qc_flags` come from the pipeline; `exclusion_rule` follows the
-paper: **R1** stroke events could not be identified reliably (7 putts), **R2** pelvis, thorax or arm sensor
-dropped out (3), **R3** gap between top and impact longer than 0.33 s (2). `included` marks the 188 analysed putts.
-(Inside the analysis code these rules are labelled R2, R3 and R4; R1 in the code is reserved for excluding a whole participant with `--exclude`.)
+paper: **R1** stroke events could not be identified reliably (7 putts), **R2** a pelvis, thorax or arm sensor
+failed for the whole recording (3), **R3** combined chain-sensor gap longer than 20 frames (0.33 s) between 6 frames
+before the top and 7 frames after impact (0). `included` marks the 190 analysed putts. (`S` in the analysis code
+marks a whole participant excluded with `--exclude`.)
 
 ### `data/processed/features.csv` (one row per putt)
 
@@ -150,7 +186,7 @@ dropped out (3), **R3** gap between top and impact longer than 0.33 s (2). `incl
 | `ds_{g}_mm` | contribution to downswing displacement (top → impact); sum = `ds_total_mm` |
 | `iv_{g}`, `ivz_{g}`, `ivy_{g}` | contribution to grip velocity at impact along x / z / y (m/s) |
 | `roll_{lead\|trail}_{g}_{top\|imp}_deg` | contribution to forearm roll at the top / at impact; sum = `roll_*_total_*` |
-| `bsx_`, `dsx_`, `ivx_`, `ivzx_`, `rollx_` + `{g}__{axis}` | the same contributions split by rotation axis of the segment: `twist`, `flex`, `bend` (pelvis, trunk, girdle) or `axial`, `swing` (shoulders, elbows); the axis terms sum exactly to the joint term |
+| `bsx_`, `dsx_`, `ivx_`, `ivzx_`, `rollx_` + `{g}__{axis}` | the same contributions split by rotation axis of the segment: `twist`, `flex`, `bend` (pelvis, trunk, girdle) or `axial`, `swing` (shoulders, elbows); the axis terms sum exactly to the joint term (elbow `axial` = pronation–supination, ≈ 0 for grip displacement by geometry) |
 | `chain_resid_x_pct`, `chain_link_sd_mm` | quality checks: residual RMS (% of grip speed), joint-distance SD |
 
 ### `data/processed/*_curves.csv.gz`
@@ -172,7 +208,7 @@ Long-format curves: one row per putt × variable (`var`), with 303 columns `back
 ## Licence and citation
 
 Code: MIT (`LICENSE`). Data: CC BY 4.0 (`LICENSE-DATA.md`). Please cite the paper and this dataset (`CITATION.cff`).
-Zenodo DOI: [10.5281/zenodo.23766847](https://doi.org/10.5281/zenodo.23766847) (code, processed data and the 200 raw motion-capture recordings).
+Zenodo DOI of this version (1.1.1): [10.5281/zenodo.24341413](https://doi.org/10.5281/zenodo.24341413). First version (1.0.0): [10.5281/zenodo.23766847](https://doi.org/10.5281/zenodo.23766847). Both records contain the code, processed data and the 200 raw motion-capture recordings.
 
 ## Contact
 

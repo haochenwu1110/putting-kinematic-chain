@@ -74,20 +74,66 @@ def lowpass(x, fs, fc, order=4):
     return filtfilt(b, a, x, axis=0, padlen=padlen)
 
 
+import os
+MASK_MODE = os.environ.get("PUTT_MASK_MODE", "per")    # per (v1.1 default) | union (v1.0) | chain | none
+CHAIN_SENSORS = ["Hips", "Spine2", "LeftArm", "RightArm", "LeftForeArm", "RightForeArm"]
+
+
+def _deps(seg, kind):
+    """Physical sensors that a segment's orientation (kind='q') or joint position (kind='p') depends on."""
+    side = "Left" if seg.startswith("Left") else ("Right" if seg.startswith("Right") else "")
+    if seg == "Hips":
+        return ["Hips"]
+    if seg in ("Spine", "Spine1"):
+        return ["Hips", "Spine2"] if kind == "q" else ["Hips"]
+    if seg in ("Spine2", "Spine3"):
+        return ["Spine2"] if kind == "q" else ["Hips", "Spine2"]
+    if seg.endswith("Shoulder"):
+        return ["Spine2"] if kind == "q" else ["Hips", "Spine2"]
+    if seg.endswith("ForeArm"):
+        return [seg] if kind == "q" else ["Hips", "Spine2", f"{side}Arm"]
+    if seg.endswith("Arm"):
+        return [seg] if kind == "q" else ["Hips", "Spine2"]
+    if seg.endswith("Hand"):
+        return [f"{side}ForeArm"] if kind == "q" else ["Hips", "Spine2", f"{side}Arm", f"{side}ForeArm"]
+    if seg.endswith(("UpLeg", "Leg", "Foot")):
+        return [seg] if seg.endswith(("UpLeg", "Leg")) else [f"{side}Leg"]
+    return CHAIN_SENSORS
+
+
+def _mask_for(df, seg, kind, union_bad, chain_bad):
+    if MASK_MODE == "union":
+        return union_bad
+    if MASK_MODE == "chain":
+        return chain_bad
+    if MASK_MODE == "none":
+        return np.zeros(len(df), bool)
+    return lost_mask(df, _deps(seg, kind))
+
+
 def clean_take(df, fs, fc, quat_segments, pos_segments, mask_segments):
-    """返回 dict: quats[seg] -> (N,4) 连续且滤波后的全局姿态；pos[seg] -> (N,3) 米。"""
-    bad = lost_mask(df, mask_segments)
+    """返回 dict: quats[seg] -> (N,4) 连续且滤波后的全局姿态；pos[seg] -> (N,3) 米。
+
+    PUTT_MASK_MODE: per (default since v1.1) = each segment only over the frames in which the sensors it
+    depends on were lost (see _deps); union = v1.0 behaviour (any of the 10 sensors lost -> interpolate every
+    segment); chain = any of the 6 upper-body chain sensors; none = keep the manufacturer's estimate.
+    The returned mask `bad` (any of the 6 chain sensors lost; union mode: any of the 10 sensors) is used only
+    for the QC gap rules.
+    """
+    union_bad = lost_mask(df, mask_segments)
+    chain_bad = lost_mask(df, CHAIN_SENSORS)
+    bad = union_bad if MASK_MODE == "union" else chain_bad   # used for QC (gap rules)
     quats, pos = {}, {}
     for s in quat_segments:
         q = df[quat_cols(s)].values.astype(float)
         q = make_continuous(q)
-        q = interp_quat(q, bad)
+        q = interp_quat(q, _mask_for(df, s, "q", union_bad, chain_bad))
         q = make_continuous(q)
         q = lowpass(q, fs, fc)
         q /= np.linalg.norm(q, axis=1, keepdims=True)
         quats[s] = q
     for s in pos_segments:
         p = df[pos_cols(s)].values.astype(float)
-        p = interp_vec(p, bad)
+        p = interp_vec(p, _mask_for(df, s, "p", union_bad, chain_bad))
         pos[s] = lowpass(p, fs, fc)
     return quats, pos, bad

@@ -55,7 +55,9 @@ def detect(x_mm, vx, speed, fs, cfg, impact_hint=None):
     amp = x_mm[i_max] - x_mm[i_top]
     if amp < 5:
         return None, flags + ["no_backswing"]
-    drop = np.where(x_mm[i_max] - x_mm[i_max:i_top + 1] > max(2.0, 0.03 * amp))[0]
+    import os
+    _mm, _fr = float(os.environ.get("PUTT_TAKE_MM", 2.0)), float(os.environ.get("PUTT_TAKE_FRAC", 0.03))
+    drop = np.where(x_mm[i_max] - x_mm[i_max:i_top + 1] > max(_mm, _fr * amp))[0]
     i_take = i_max + int(drop[0]) - 1 if len(drop) else i_max
     i_take = max(i_take, 0)
     if i_take < int(cfg.ADDRESS_WIN_S[0] * fs):
@@ -90,6 +92,8 @@ def detect(x_mm, vx, speed, fs, cfg, impact_hint=None):
     elif abs(t_imp - i_pk) > cfg.IMPACT_FALLBACK_TOL:
         flags.append(f"impact_vs_peak_{t_imp - i_pk:+.1f}f")
 
+    import os
+    t_imp = float(t_imp) + float(os.environ.get("PUTT_IMPACT_SHIFT", 0.0))   # sensitivity: shift impact (frames)
     ev = dict(address_start=a0, address_end=a1, takeaway=i_take, top=i_top,
               impact=float(t_imp), peak_v=i_pk, finish=i_fin, n_strokes=n_strokes,
               x_address_mm=x_addr)

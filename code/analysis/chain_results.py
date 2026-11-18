@@ -191,7 +191,8 @@ def axis_analysis(d):
     # 各轴分量与杆头速度（主要分析的补充）
     xs = []
     for n, k in AXIS_PARTS:
-        if k is None:
+        # 前臂旋前旋后绕前臂长轴，按几何对腕位移的贡献为零（数值 < 0.2 mm），不参与检验（v1.1）
+        if k is None or n == "Elbow/forearm axial rotation":
             continue
         for px, sx in (("bsx_", "_mm"), ("dsx_", "_mm"), ("ivx_", "")):
             col = f"{px}{n.replace(' ', '_').replace('/', '_')}{sx}"

@@ -134,14 +134,22 @@ def fig3(d, cc, out):
                edgecolor="white", lw=0.7, zorder=3)
     lim = (-2, 16)
     ax.plot(lim, lim, color=MUTED, lw=0.8, ls=(0, (3, 2)), zorder=2)
-    ax.set_xlim(lim); ax.set_ylim(lim)
+    from scipy import stats as _st
+    _lr = _st.linregress(med.top_d_pelvis_turn_closed, med.top_d_shoulder_turn_closed)
+    _xs = np.linspace(med.top_d_pelvis_turn_closed.min(), med.top_d_pelvis_turn_closed.max(), 10)
+    ax.plot(_xs, _lr.intercept + _lr.slope * _xs, color=COL["Pelvis"], lw=1.1, zorder=2)
+    _rr = mr.rmcorr(d, "top_d_pelvis_turn_closed", "top_d_shoulder_turn_closed")
+    ax.set_xlim(lim); ax.set_ylim(lim[0], 19.5); ax.set_yticks([0, 5, 10, 15])
     xf = d.groupby("subject").top_d_xfactor.median()
-    ax.text(0.04, 0.96, f"X-factor at top: {xf.mean():.1f}° ± {xf.std():.1f}°\n(mean ± SD of player medians)",
+    ax.text(0.04, 0.96, f"X-factor at top: {num(xf.mean(), '.1f')}° ± {xf.std():.1f}°\n(mean ± SD of player medians)\n"
+            f"slope of player medians {_lr.slope:.2f} [{_lr.slope - 1.96 * _lr.stderr:.2f}, {_lr.slope + 1.96 * _lr.stderr:.2f}]\n"
+            f"within players $r_{{rm}}$ = {_rr['r']:.2f}",
             transform=ax.transAxes, va="top", fontsize=6.5, color=INK)
     ax.legend([Line2D([], [], color=MUTED, lw=0.8, ls=(0, (3, 2))),
                Line2D([], [], marker="o", ls="", color=COL["Pelvis"], markersize=5),
+               Line2D([], [], color=COL["Pelvis"], lw=1.1),
                Line2D([], [], marker="o", ls="", color=PALE, markersize=3)],
-              ["shoulder = pelvis", "player median", "single putt"], loc="lower right", frameon=False,
+              ["shoulder = pelvis", "player median", "fit to medians", "single putt (nested)"], loc="lower right", frameon=False,
               handlelength=1.6, borderaxespad=0.2)
     ax.set_xlabel("Pelvis turn at top (°)")
     ax.set_ylabel("Shoulder turn at top (°)")
@@ -164,6 +172,7 @@ def fig3(d, cc, out):
         ax.fill_between(x, neg_base, neg_base + yn, color=COL[s], lw=0)
         pos_base += yp; neg_base += yn
     ax.plot(x, curve(["cv_measured"]), color=INK, lw=1.3, label="Grip, measured")
+    ax.plot(x, curve(["cv_resid"]), color=MUTED, lw=0.9, ls=(0, (1, 1)), label="Residual")
     ax.axhline(0, color=MUTED, lw=0.6)
     for v, lab in ((101, "Top"), (202, "Impact")):
         ax.axvline(v, color=MUTED, lw=0.6, ls=(0, (2, 2)))
@@ -220,18 +229,19 @@ def fig4(d, R, out):
     r = scatter_rm(axb, dd, "ds_total_mm", "head_speed", color=COL["Pelvis"])
     axb.set_xlabel("Δ downswing amplitude (mm)")
     axb.set_ylabel("Δ club-head speed (mph)")
-    axb.text(0.04, 0.97, f"{rm_label(r)}\nshare of speed variance\n{share_label(amp['amplitude'])}",
+    axb.text(0.04, 0.97, f"{rm_label(r)}\nshare of within-player variance\nin ln(mean downswing grip speed)\n{share_label(amp['amplitude'])}",
              transform=axb.transAxes, va="top", fontsize=6.3, color=INK, zorder=5,
              bbox=dict(facecolor="white", edgecolor="none", alpha=0.85, pad=1.5))
-    title(axb, "b", "Amplitude sets speed")
+    title(axb, "b", "Amplitude covaries with speed")
     axc = fig.add_subplot(gs[0, 2], sharey=axb)
     r = scatter_rm(axc, dd, "t_downswing_s", "head_speed", xscale=1000, color=MUTED)
     axc.set_xlabel("Δ downswing time (ms)")
     axc.tick_params(labelleft=False)
-    axc.text(0.04, 0.97, f"{rm_label(r)}\nshare of speed variance\n{share_label(amp['timing'])}",
+    axc.text(0.04, 0.97, f"{rm_label(r)}\nshare of within-player variance\nin ln(mean downswing grip speed)\n{share_label(amp['timing'])}",
              transform=axc.transAxes, va="top", fontsize=6.3, color=INK, zorder=5,
              bbox=dict(facecolor="white", edgecolor="none", alpha=0.85, pad=1.5))
     title(axc, "c", "Downswing time does not")
+    axb.set_ylim(-1.8, 2.55); axb.set_yticks([-1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 1.5])
 
     # (d) 上杆乱、下杆稳：每人的逐杆变异系数
     ax = fig.add_subplot(gs[1, :])
@@ -257,7 +267,7 @@ def fig4(d, R, out):
     ax.legend(loc="upper center", ncol=2, frameon=False, bbox_to_anchor=(0.5, 1.02))
     tidy(ax)
     ax.tick_params(axis="x", length=0)
-    title(ax, "d", "Timing: backswing varies, downswing is a personal constant")
+    title(ax, "d", "Timing: backswing time varies more than downswing time")
 
     fig.savefig(out / "Figure3_speed_sources.png", dpi=DPI)
     fig.savefig(out / "Figure3_speed_sources.pdf")
@@ -343,7 +353,7 @@ def main():
     ap.add_argument("--dir", type=Path, required=True)
     ap.add_argument("--res", type=Path, required=True, help="chain_results.py 的输出文件夹")
     ap.add_argument("--out", type=Path, required=True)
-    ap.add_argument("--font", default="DejaVu Serif")
+    ap.add_argument("--font", default="Liberation Serif")
     ap.add_argument("--exclude", default="")
     a = ap.parse_args()
     mr.EXCLUDE_SUBJECTS[:] = [x for x in a.exclude.split(",") if x]

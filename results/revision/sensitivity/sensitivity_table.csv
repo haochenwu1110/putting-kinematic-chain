@@ -1,0 +1,29 @@
+analysis,putts,players,resid_max_pct,body_pct,arms_pct,pelvis_twist_pct,trunk_twist_pct,trunk_sidebend_pct,shoulder_swing_pct,amplitude_share_pct,amp_lo,amp_hi,r_grip_v_head_speed,r_trail_roll_face,trail_roll_face_robust,n_robust_face,backswing_time_cv_pct,downswing_time_cv_pct
+Main analysis,190,20,16.1,76,24,37,25,6,26,104,95,114,0.56,0.33,True,4,46.8,8.9
+Gap filling: v1.0 method (any of 10 sensors),188,20,26.1,76,23,37,25,6,26,105,91,115,0.57,0.31,True,4,44.3,9.5
+Gap filling: any of 6 chain sensors,190,20,21.6,76,23,36,25,6,26,105,92,114,0.56,0.33,True,4,44.0,10.3
+Gap filling: none (manufacturer estimate),192,20,14.4,76,24,37,25,6,27,108,97,115,0.57,0.33,True,3,43.7,9.9
+Impact −2 frames,190,20,16.1,76,24,37,25,6,26,110,99,123,0.6,0.33,True,4,46.8,9.7
+Impact −1 frame,190,20,16.1,76,24,37,25,6,26,107,97,119,0.58,0.33,True,4,46.8,9.2
+Impact +1 frame,190,20,16.1,76,24,37,25,6,26,102,93,111,0.54,0.33,True,5,46.8,8.5
+Impact +2 frames,190,20,16.1,76,24,37,25,6,26,101,90,109,0.52,0.33,True,4,46.8,8.2
+Low-pass 4 Hz,189,20,13.2,76,23,37,25,6,26,105,96,115,0.57,0.32,True,3,47.7,8.8
+Low-pass 8 Hz,190,20,18.4,76,24,37,25,6,26,104,94,114,0.56,0.33,True,4,46.4,9.6
+Axes +5° about medio-lateral axis,190,20,16.1,76,24,35,27,4,26,104,95,114,0.56,0.33,True,4,46.8,8.9
+Axes −5° about medio-lateral axis,190,20,16.1,76,24,38,22,8,26,104,95,114,0.56,0.33,True,4,46.8,8.9
+Axes +10° about medio-lateral axis,190,20,16.1,76,24,33,28,2,26,104,95,114,0.56,0.33,True,4,46.8,8.9
+Axes −10° about medio-lateral axis,190,20,16.1,76,24,38,19,11,26,104,95,114,0.56,0.33,True,4,46.8,8.9
+Axes +5° about antero-posterior axis,190,20,16.1,76,24,36,24,6,27,104,95,114,0.56,0.33,True,4,46.8,8.9
+Axes −5° about antero-posterior axis,190,20,16.1,76,24,37,25,6,25,104,95,114,0.56,0.33,True,4,46.8,8.9
+Axes +10° about antero-posterior axis,190,20,16.1,76,24,35,23,6,28,104,95,114,0.56,0.33,True,4,46.8,8.9
+Axes −10° about antero-posterior axis,190,20,16.1,76,24,36,24,6,24,104,95,114,0.56,0.33,True,4,46.8,8.9
+Estimated lumbar segments removed,190,20,23.0,82,24,37,27,10,26,104,95,114,0.56,0.33,True,4,46.8,8.9
+"Takeaway threshold (1 mm, 1.5%)",190,20,16.1,76,23,36,24,6,26,104,95,115,0.56,0.31,True,4,45.9,8.9
+"Takeaway threshold (4 mm, 6%)",190,20,16.0,76,24,36,25,6,26,105,96,115,0.57,0.34,True,4,27.0,9.0
+Excl. combined chain gap > 20 frames,186,20,11.4,75,24,36,25,6,26,106,97,116,0.57,0.33,True,2,42.2,8.7
+Excl. combined chain gap > 6 frames,149,20,6.8,75,24,36,25,6,26,114,99,123,0.59,0.4,True,2,30.2,8.7
+Excl. |impact − velocity peak| > 5 frames,115,18,16.1,74,26,36,24,5,27,105,95,117,0.7,0.36,True,1,21.7,9.0
+Excl. residual > 10%,186,20,8.7,75,24,36,25,6,26,105,95,115,0.58,0.33,True,3,42.5,8.7
+Excl. trials 1–2,151,20,16.1,79,21,37,25,6,26,102,94,114,0.57,0.34,True,8,47.0,8.9
+Excl. trials 1–3,131,20,16.1,80,20,37,25,6,26,98,86,108,0.57,0.28,True,5,47.4,8.5
+Excl. participant P07,183,19,15.6,76,23,36,25,6,27,105,97,116,0.56,0.33,True,3,46.1,8.8

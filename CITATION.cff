@@ -10,10 +10,10 @@ authors:
     given-names: Xudong
   - family-names: Lv
     given-names: Wenxue
-version: 1.0.0
-date-released: 2026-10-29
+version: 1.1.1
+date-released: 2026-11-18
 license: [MIT, CC-BY-4.0]
-doi: 10.5281/zenodo.23766847
+doi: 10.5281/zenodo.24341413
 preferred-citation:
   type: article
   title: "Testing the Pendulum Model of Golf Putting: A Stroke-by-Stroke Kinematic-Chain Analysis Using Wearable Inertial Sensors and a Launch Monitor"

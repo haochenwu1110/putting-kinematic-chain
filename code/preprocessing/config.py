@@ -17,11 +17,12 @@ REAL_SEGMENTS = ["Hips", "RightUpLeg", "RightLeg", "LeftUpLeg", "LeftLeg",
                  "Spine2", "RightArm", "RightForeArm", "LeftArm", "LeftForeArm"]
 
 # ---------- 预处理参数 ----------
-LOWPASS_HZ = 6.0           # 4 阶零相位 Butterworth 截止频率（推杆为低频动作）
+import os
+LOWPASS_HZ = float(os.environ.get("PUTT_LOWPASS", 6.0))           # 4 阶零相位 Butterworth 截止频率（推杆为低频动作）
 MAX_GAP_FRAMES = 20        # 顶点→击球附近连续丢帧超过此数（0.33 s）→ CHECK；其它位置只记 WARN
                            # （200 杆验证：插值后丢帧杆与杆头速度的残差不比无丢帧杆大）
 ADDRESS_WIN_S = (0.40, 0.10)   # 准备姿态窗口：起杆前 0.40 s 到 0.10 s 的平均
-TAKEAWAY_SPEED_FRAC = 0.10     # 起杆/收杆判定：握把速度 < 峰值速度的 10%
+TAKEAWAY_SPEED_FRAC = float(os.environ.get("PUTT_TAKEAWAY_FRAC", 0.10))     # 起杆/收杆判定：握把速度 < 峰值速度的 10%
 MULTI_STROKE_FRAC = 0.40       # 文件内其它挥杆峰 > 主峰 40% 视为"多次挥杆"→ QC 标记
 IMPACT_FALLBACK_TOL = 5        # 击球点两种估计相差 > 5 帧 → QC 标记
 N_NORM = 101                   # 各阶段时间归一化点数（0–100%）

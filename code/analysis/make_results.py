@@ -15,7 +15,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 BLUE, ORANGE, INK, MUTED, GRID = "#2a78d6", "#eb6834", "#0b0b0b", "#52514e", "#d9d8d4"
-EXCLUDE_SUBJECTS = []                     # R1: whole-session sensor/calibration anomaly（--exclude 指定）
+EXCLUDE_SUBJECTS = []                     # S: whole-session sensor/calibration anomaly（--exclude 指定）
 GRADE_EN = {"大二年级": "Year 2", "大三年级": "Year 3"}
 N_PERM = 2000
 DPI = 600                                  # Bioengineering: figures ≥ 600 dpi
@@ -71,10 +71,12 @@ def load(dirp):
     def reason(r):
         fl = r["flags"] if isinstance(r["flags"], str) else ""
         toks = fl.split("; ")
-        if r["subject"] in EXCLUDE_SUBJECTS: return "R1"
-        if r["status"] == "FAIL" or any(t.startswith("impact_fallback") for t in toks): return "R2"
-        if any(t.startswith("key_sensor_lost") for t in toks): return "R3"
-        if any(t.startswith("gap_") for t in toks): return "R4"
+        # 规则编号与论文 2.3 节一致（v1.1）：R1 无法可靠识别动作事件；R2 链条传感器在整段记录中失效；
+        # R3 顶点–击球附近链条传感器（合并计算）连续缺失 > 20 帧；S 为 --exclude 指定的整名受试者
+        if r["subject"] in EXCLUDE_SUBJECTS: return "S"
+        if r["status"] == "FAIL" or any(t.startswith("impact_fallback") for t in toks): return "R1"
+        if any(t.startswith("key_sensor_lost") for t in toks): return "R2"
+        if any(t.startswith("gap_") for t in toks): return "R3"
         return ""
     d["exclude"] = d.apply(reason, axis=1)
     clean = d[d.exclude == ""].copy()
@@ -131,7 +133,7 @@ def spm_regress(curves, clean, var, y):
         yp = yc.copy()
         for g in groups: yp[g] = yc[RNG.permutation(g)]
         mx[b] = max([cc[2] for cc in clusters(tmap(yp)[1])], default=0)
-    sig = [dict(start=int(a), end=int(e), p=float((mx >= m).mean()), r_mean=float(r[a:e + 1].mean()))
+    sig = [dict(start=int(a), end=int(e), p=float((mx >= m).mean()), r_mean=float(r[a:e + 1].mean()), mass=float(m), t_thr=float(thr))
            for a, e, m in cl if (mx >= m).mean() < 0.05]
     # within-subject split for display: trials above vs below own median of y
     med = c.groupby("subject")[y].transform("median")

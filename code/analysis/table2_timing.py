@@ -2,7 +2,7 @@
 """Table 2 of the paper: individual stability of stroke timing and amplitude.
 
 Mean ± SD over the 20 player medians; putt-to-putt CV = within-player SD / mean (median over players);
-ICC(1) = one-way intraclass correlation. Uses the 188 strokes retained by the exclusion rules.
+ICC(1) = one-way intraclass correlation. Uses the strokes retained (190 in v1.1) by the exclusion rules.
 Usage: python table2_timing.py --dir ../../data/processed [--out ../../results/table2_timing.csv]
 """
 import argparse

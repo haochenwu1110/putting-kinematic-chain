@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Reproduce all statistics, tables and Figures 2-4 of the paper from the de-identified processed data.
 
-    python reproduce.py                 # main analysis (20 participants, 188 putts) -> results_rerun/
+    python reproduce.py                 # main analysis (20 participants, 190 putts) -> results_rerun/
     python reproduce.py --sensitivity   # also the sensitivity analysis without participant P07
 
 Takes about 1-3 minutes (2000 bootstrap resamples and cluster permutations).
@@ -25,7 +25,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", type=Path, default=REPO / "results_rerun")
     ap.add_argument("--sensitivity", action="store_true")
-    ap.add_argument("--font", default="DejaVu Serif")
+    ap.add_argument("--font", default="Liberation Serif")
     a = ap.parse_args()
     out = a.out.resolve()
     out.mkdir(parents=True, exist_ok=True)
